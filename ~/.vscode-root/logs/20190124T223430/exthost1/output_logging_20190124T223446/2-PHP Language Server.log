@@ -1,0 +1,20 @@
+DEBUG     Checking PHPLS_ALLOW_XDEBUG
+DEBUG     The xdebug extension is not loaded
+
+[Info  - 10:34:47 PM] 6 files total
+[Info  - 10:34:47 PM] Indexing project for definitions and static references
+Parsing file:///var/www/html/myproject/reportlib/src/__phutil_library_map__.php
+Parsing file:///var/www/html/myproject/reportlib/src/application/PhabricatorReportApplication.php
+Parsing file:///var/www/html/myproject/reportlib/src/__phutil_library_init__.php
+Parsing file:///var/www/html/myproject/reportlib/src/storage/PhabricatorReportDao.php
+Parsing file:///var/www/html/myproject/reportlib/src/controller/EmployeeWorkloadController.php
+Parsing file:///var/www/html/myproject/reportlib/src/controller/ReportController.php
+[Info  - 10:34:47 PM] Indexing project for dynamic references
+Parsing file:///var/www/html/myproject/reportlib/src/__phutil_library_map__.php
+Parsing file:///var/www/html/myproject/reportlib/src/application/PhabricatorReportApplication.php
+Parsing file:///var/www/html/myproject/reportlib/src/__phutil_library_init__.php
+Parsing file:///var/www/html/myproject/reportlib/src/storage/PhabricatorReportDao.php
+Parsing file:///var/www/html/myproject/reportlib/src/controller/EmployeeWorkloadController.php
+Parsing file:///var/www/html/myproject/reportlib/src/controller/ReportController.php
+[Info  - 10:34:47 PM] 0 Packages
+[Info  - 10:34:47 PM] All 6 PHP files parsed in 0 seconds. 146 MiB allocated.

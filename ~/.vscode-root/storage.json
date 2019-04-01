@@ -1,0 +1,12 @@
+{
+    "telemetry.machineId": "e32808a9bc00e32a943f50ac30d94889e206f46b45a305592377802af296c3a3",
+    "theme": "vs-dark",
+    "themeBackground": "#1e1e1e",
+    "pickerWorkingDir": "/var/www/html/myproject",
+    "openedPathsList": {
+        "workspaces2": [
+            "file:///var/www/html/myproject/reportlib"
+        ],
+        "files2": []
+    }
+}
