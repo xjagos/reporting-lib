@@ -1,0 +1,20 @@
+/**
+ * @provides reporting-styles-css
+ */
+
+.device-desktop .phui-property-list-key {
+  width:22%;
+  margin-left: 1%;
+  text-align: right;
+  float: left;
+  clear: left;
+  margin-bottom: 4px;
+}
+
+.device-desktop .phui-property-list-value {
+  width: 74%;
+  margin-left: 1%;
+  float: left;
+  margin-bottom: 4px;
+  word-wrap: break-word;
+}
