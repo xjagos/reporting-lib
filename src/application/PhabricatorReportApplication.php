@@ -3,7 +3,7 @@
 final class ReportApplication extends PhabricatorApplication {
 
   public function getName() {
-    return pht('Report');
+    return pht('Reporting');
   }
 
   public function getIcon() {
