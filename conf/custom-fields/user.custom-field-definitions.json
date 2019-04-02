@@ -1,0 +1,21 @@
+{
+  "reporting:overload-ratio": {
+    "name": "Employee overload ratio",
+    "type": "int",
+    "required": false,
+    "search": true
+  },
+  "reporting:worktime-tarif": {
+    "name": "Employee worktime tarif",
+    "type": "int",
+    "required": false,
+    "search": true
+  },
+  "reporting:access-control-list": {
+    "name": "Acces control list",
+    "type": "users",
+    "required": false,
+    "search": true
+  }
+}
+

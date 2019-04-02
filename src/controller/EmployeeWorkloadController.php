@@ -7,6 +7,10 @@ const MANIPHEST_IBA_ACTUAL_TIME_TESTING = 'std:maniphest:iba:actual-time-testing
 const MANIPHEST_IBA_TESTER = 'std:maniphest:iba:tester';
 const MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE = 'std:maniphest:iba:estimated-completion-date';
 
+const USER_REPORTING_OVERLOAD_RATIO = 'std:user:reporting:overload-ratio';
+const USER_REPORTING_WORKTIME_TARIF = 'std:user:reporting:worktime-tarif';
+const USER_REPORTING_ACCESS_CONTROL_LIST = 'std:user:reporting:access-control-list';
+
 const STATUS_OPEN = 'open';
 const STATUS_WAITING = 'waiting';
 const STATUS_TEST = 'test';
@@ -69,9 +73,9 @@ final class EmployeeWorkloadController extends PhabricatorController {
         ->executeOne();
       
       // Load user custom fields: overloadRatio and tarif
-      $this->overloadRatio = $this->getCustomFieldValue($this->chosenUser, 'std:user:iba:overload-ratio');
+      $this->overloadRatio = $this->getCustomFieldValue($this->chosenUser, USER_REPORTING_OVERLOAD_RATIO);
       $this->overloadRatio = $this->overloadRatio == null ? 0.2 : $this->overloadRatio / 100;
-      $this->tarif = $this->getCustomFieldValue($this->chosenUser, 'std:user:iba:worktime-tarif');
+      $this->tarif = $this->getCustomFieldValue($this->chosenUser, USER_REPORTING_WORKTIME_TARIF);
       $this->tarif = $this->tarif == null ? 1.0 : $this->tarif / 100;
 
       // Get selected dates
@@ -99,7 +103,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
     ->withUsernames(array($userName))
     ->executeOne();
 
-    $usersList = $this->getCustomFieldValue($this->viewer, 'std:user:iba:access-control-list');
+    $usersList = $this->getCustomFieldValue($this->viewer, USER_REPORTING_ACCESS_CONTROL_LIST);
 
     if($usersList != null && count($usersList) > 0) {
       foreach ($usersList as $user) {      

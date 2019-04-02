@@ -1,0 +1,39 @@
+{
+  "iba:estimated-completion-date": {
+    "name": "Estimated completion date",
+    "type": "date",
+    "required": false,
+    "search": true
+  },
+  "iba:estimated-time": {
+    "name": "Estimated impl. time",
+    "type": "int",
+    "required": false,
+    "search": true
+  },
+  "iba:estimated-time-testing": {
+    "name": "Estimated testing time",
+    "type": "int",
+    "required": false,
+    "search": true
+  },
+  "iba:actual-time": {
+    "name": "Actual impl. time",
+    "type": "int",
+    "required": false,
+    "search": true
+  },
+  "iba:actual-time-testing": {
+    "name": "Actual testing time",
+    "type": "int",
+    "required": false,
+    "search": true
+  },  
+  "iba:tester": {
+    "name": "Tester",
+    "type": "users",
+    "required": false,
+    "search": true
+  }
+}
+
