@@ -1,7 +1,10 @@
 # Reporting library
 
 
-Reporting library is created as libphutil library (see https://secure.phabricator.com/book/libphutil/article/overview/). For installation library follow instructions below:
+Reporting library is created as libphutil library (see https://secure.phabricator.com/book/libphutil/article/overview/).
+
+## Installation
+For installation library follow instructions below:
 
 **1. Download reporting library from:** https://github.com/xjagos/reporting-lib.git \
 &nbsp;&nbsp;&nbsp; *git clone https://github.com/xjagos/reporting-lib.git*
@@ -39,5 +42,43 @@ Reporting library is created as libphutil library (see https://secure.phabricato
 **8. Rebuild celerity map**\
 &nbsp;&nbsp;&nbsp;In: *phabricator/* run: *./bin/celerity map*
 
-
 Reporting library will be added to phabricator. You will find it in Applications by name Reporting.
+
+## Update
+For updating you need:
+
+**1. Update Repository**\
+&nbsp;&nbsp;&nbsp; In: *reporting-lib/* run: *git pull master origin* 
+
+**2. Run: arc liberate src/**
+
+## Configuration
+It is necessary to create custom fields for proper working of library. For more info about custom fields see: https://secure.phabricator.com/book/phabricator/article/custom_fields/
+
+**1. Create Custom Maniphest fields**\
+&nbsp;&nbsp;&nbsp; Copy content of: *reporting-lib/conf/custom-fields/maniphest.custom-field-definitions.json* to: 
+\
+&nbsp;&nbsp;&nbsp; *Phabricator -> Config -> Application settings -> Maniphest -> maniphest.custom-field-definitions -> Database value*
+\
+\
+&nbsp;&nbsp;&nbsp; Save configuration by button *Save Config Entry*.
+
+**2. Create Custom User fields**\
+&nbsp;&nbsp;&nbsp; Copy content of: *reporting-lib/conf/custom-fields/user.custom-field-definitions.json* to: 
+\
+&nbsp;&nbsp;&nbsp; *Phabricator -> Config -> Application settings -> User Profiles -> user.custom-field-definitions -> Database value*
+\
+\
+&nbsp;&nbsp;&nbsp; Save configuration by button *Save Config Entry*.
+
+## Usage
+You will find it in *Applications* by name *Reporting*. It consists of 3 modules:
+
+**1. Employee workload**\
+&nbsp;&nbsp;&nbsp;
+
+**2. Task tree**\
+&nbsp;&nbsp;&nbsp;
+
+**3. Projects implementation chart**\
+&nbsp;&nbsp;&nbsp;
