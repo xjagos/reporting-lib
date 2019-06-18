@@ -1,5 +1,10 @@
 <?php
 
+const MANIPHEST_IBA_ESTIMATED_TIME = 'std:maniphest:iba:estimated-time';
+const MANIPHEST_IBA_ESTIMATED_TIME_TESTING = 'std:maniphest:iba:estimated-time-testing';
+const MANIPHEST_IBA_ACTUAL_TIME = 'std:maniphest:iba:actual-time';
+const MANIPHEST_IBA_ACTUAL_TIME_TESTING = 'std:maniphest:iba:actual-time-testing';
+
 final class ModifiedManiphestTaskGraph
   extends PhabricatorObjectGraph {
 
@@ -22,6 +27,79 @@ final class ModifiedManiphestTaskGraph
 
   protected function isClosed($object) {
     return $object->isClosed();
+  }
+
+  // private function getHours($viewer, $phid) {
+  //   $tasks = id(new ManiphestTaskQuery())
+  //   ->setViewer($viewer)
+  //   ->withPHIDs(array($phid))
+  //   ->execute();
+
+  //   $result = array();
+
+  //   foreach ($tasks as $task) {      
+  //     $et = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME);
+  //     $et = $et == null? 0 : $et;
+  //     $at = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME);
+  //     $result['at'] = $at == null? 0 : $at;
+  //     $ett = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);
+  //     $result['ett'] = $ett == null? 0 : $ett;
+  //     $att = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME_TESTING);
+  //     $result['att'] = $att == null? 0 : $att;
+
+
+  //     $children = id(new ManiphestTaskQuery())
+  //       ->setViewer($viewer)
+  //       ->withParentTaskIDs(array($task->getId()))
+  //       ->execute();
+      
+  //     $et_sum = 0;
+  //     foreach ($children as $child) {  
+  //       $et_sum += $this->getCustomFieldValue($child, MANIPHEST_IBA_ESTIMATED_TIME);
+  //     }
+  //     $et_sum += $et;
+
+  //     $result['et_res'] = $et.' / '.$et_sum;
+  //   }
+
+  //   return $result;
+  // }
+
+  private function getHours($viewer, $phid) {
+    $tasks = id(new ManiphestTaskQuery())
+    ->setViewer($viewer)
+    ->withPHIDs(array($phid))
+    ->execute();
+
+    //$queue = new \Ds\Queue();
+    $result = array();
+
+    foreach ($tasks as $task) {      
+      $et = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME);
+      $et = $et == null? 0 : $et;
+      $at = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME);
+      $result['at'] = $at == null? 0 : $at;
+      $ett = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);
+      $result['ett'] = $ett == null? 0 : $ett;
+      $att = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME_TESTING);
+      $result['att'] = $att == null? 0 : $att;
+
+
+      $children = id(new ManiphestTaskQuery())
+        ->setViewer($viewer)
+        ->withParentTaskIDs(array($task->getId()))
+        ->execute();
+      
+      $et_sum = 0;
+      foreach ($children as $child) {  
+        $et_sum += $this->getCustomFieldValue($child, MANIPHEST_IBA_ESTIMATED_TIME);
+      }
+      $et_sum += $et;
+
+      $result['et_res'] = $et.' / '.$et_sum;
+    }
+
+    return $result;
   }
 
   protected function newTableRow($phid, $object, $trace) {
@@ -100,13 +178,19 @@ final class ModifiedManiphestTaskGraph
             'align' => 'E',
           ));
     }
+    
+    $result = $this->getHours($viewer, $phid);    
 
     return array(
       $marker,
       $trace,
       $status,
       //$assigned,
-      $link,
+      $link,  
+      $result['et_res'],
+      $result['at'],
+      $result['ett'],
+      $result['att']
     );
   }
 
@@ -119,6 +203,10 @@ final class ModifiedManiphestTaskGraph
           pht('Status'),
           //pht('Assigned'),
           pht('Task'),
+          pht('Estimated'),
+          pht('Actual'),          
+          pht('Estimated - testing'),          
+          pht('Actual - testing'),          
         ))
       ->setColumnClasses(
         array(
@@ -127,6 +215,10 @@ final class ModifiedManiphestTaskGraph
           'graph-status',
           //null,
           'wide pri object-link',
+          'task-estimated',
+          'task-actual',
+          'task-estimated-testing',
+          'task-actual-testing'
         ))
       ->setColumnVisibility(
         array(
@@ -166,5 +258,25 @@ final class ModifiedManiphestTaskGraph
     );
   }
 
+    /**
+   * @param[in] object Phabricator object which has the custom field
+   * @param[in] keyField Key of custom field
+   * 
+   * @return custom field value
+   */
+  private function getCustomFieldValue($object, $keyField) {        
+    $field = PhabricatorCustomField::getObjectField(
+      $object,
+      PhabricatorCustomField::ROLE_DEFAULT,
+      $keyField
+    );
+  
+    id(new PhabricatorCustomFieldStorageQuery())
+    ->addField($field)
+    ->execute();
+  
+    $value = $field->getValueForStorage();
+    return $value;
+  }
 
 }
