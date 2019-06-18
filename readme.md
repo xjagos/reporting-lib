@@ -72,13 +72,34 @@ It is necessary to create custom fields for proper working of library. For more 
 &nbsp;&nbsp;&nbsp; Save configuration by button *Save Config Entry*.
 
 ## Usage
-You will find it in *Applications* by name *Reporting*. It consists of 3 modules:
+You will find it in *Applications* by name *Reporting*. It consists of 3 submodules:
 
-**1. Employee workload**\
-&nbsp;&nbsp;&nbsp;
+### 1. Employee workload
+#### Main features
+* shows hours of planned work for selected user and interval
+* lists tasks for selected user and interval
+* highlights tasks, which should have been already done
 
-**2. Task tree**\
-&nbsp;&nbsp;&nbsp;
+#### Custom fields
+Employee workload works with custom fields which extends User and Task fields.
 
-**3. Projects implementation chart**\
-&nbsp;&nbsp;&nbsp;
+##### User fields
+Custom fields can be set by editing user profile. There are fields:
+1. Employee overload ratio 
+2. Employee worktime tarif
+3. Acces control list
+
+##### Task fields
+Custom fields can be set by editing task. There are fields:
+1. Estimated completion date
+2. Estimated impl. time
+3. Estimated testing time
+4. Actual impl. time
+5. Actual testing time
+6. Tester
+
+#### Usage
+
+### 2. Task tree
+
+### 3. Projects implementation chart
