@@ -29,78 +29,60 @@ final class ModifiedManiphestTaskGraph
     return $object->isClosed();
   }
 
-  // private function getHours($viewer, $phid) {
-  //   $tasks = id(new ManiphestTaskQuery())
-  //   ->setViewer($viewer)
-  //   ->withPHIDs(array($phid))
-  //   ->execute();
-
-  //   $result = array();
-
-  //   foreach ($tasks as $task) {      
-  //     $et = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME);
-  //     $et = $et == null? 0 : $et;
-  //     $at = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME);
-  //     $result['at'] = $at == null? 0 : $at;
-  //     $ett = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);
-  //     $result['ett'] = $ett == null? 0 : $ett;
-  //     $att = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME_TESTING);
-  //     $result['att'] = $att == null? 0 : $att;
-
-
-  //     $children = id(new ManiphestTaskQuery())
-  //       ->setViewer($viewer)
-  //       ->withParentTaskIDs(array($task->getId()))
-  //       ->execute();
-      
-  //     $et_sum = 0;
-  //     foreach ($children as $child) {  
-  //       $et_sum += $this->getCustomFieldValue($child, MANIPHEST_IBA_ESTIMATED_TIME);
-  //     }
-  //     $et_sum += $et;
-
-  //     $result['et_res'] = $et.' / '.$et_sum;
-  //   }
-
-  //   return $result;
-  // }
-
   private function getHours($viewer, $phid) {
     $tasks = id(new ManiphestTaskQuery())
     ->setViewer($viewer)
     ->withPHIDs(array($phid))
     ->execute();
 
-    //$queue = new \Ds\Queue();
     $result = array();
 
     foreach ($tasks as $task) {      
       $et = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME);
       $et = $et == null? 0 : $et;
-      $at = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME);
-      $result['at'] = $at == null? 0 : $at;
-      $ett = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);
-      $result['ett'] = $ett == null? 0 : $ett;
-      $att = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME_TESTING);
-      $result['att'] = $att == null? 0 : $att;
+      $at = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME);      
+      $at = $at == null? 0 : $at;
+      $ett = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);      
+      $ett = $ett == null? 0 : $ett;
+      $att = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME_TESTING);      
+      $att = $att == null? 0 : $att;
 
-
-      $children = id(new ManiphestTaskQuery())
-        ->setViewer($viewer)
-        ->withParentTaskIDs(array($task->getId()))
-        ->execute();
-      
+      $queue = new SplQueue();
+      $queue->push($task);
+      $visited = array($task->getId());
       $et_sum = 0;
-      foreach ($children as $child) {  
-        $et_sum += $this->getCustomFieldValue($child, MANIPHEST_IBA_ESTIMATED_TIME);
-      }
-      $et_sum += $et;
+      $at_sum = 0;
+      $ett_sum = 0;
+      $att_sum = 0;
+
+      while (!$queue->isEmpty()) {
+        $actTask = $queue->dequeue();
+
+        $children = id(new ManiphestTaskQuery())
+        ->setViewer($viewer)
+        ->withParentTaskIDs(array($actTask->getId()))
+        ->execute();
+              
+        foreach ($children as $child) {  
+          if(!in_array($child->getId(), $visited)) {
+            array_push($visited, $child->getId());
+            $queue->push($child);
+          }
+        }
+        $et_sum += $this->getCustomFieldValue($actTask, MANIPHEST_IBA_ESTIMATED_TIME);
+        $at_sum += $this->getCustomFieldValue($actTask, MANIPHEST_IBA_ACTUAL_TIME);
+        $ett_sum += $this->getCustomFieldValue($actTask, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);
+        $att_sum += $this->getCustomFieldValue($actTask, MANIPHEST_IBA_ACTUAL_TIME_TESTING);
+      }                  
 
       $result['et_res'] = $et.' / '.$et_sum;
+      $result['at_res'] = $at.' / '.$at_sum;
+      $result['ett_res'] = $ett.' / '.$ett_sum;
+      $result['att_res'] = $att.' / '.$att_sum;
     }
 
     return $result;
-  }
+  }  
 
   protected function newTableRow($phid, $object, $trace) {
     $viewer = $this->getViewer();
@@ -188,9 +170,9 @@ final class ModifiedManiphestTaskGraph
       //$assigned,
       $link,  
       $result['et_res'],
-      $result['at'],
-      $result['ett'],
-      $result['att']
+      $result['at_res'],
+      $result['ett_res'],
+      $result['att_res']
     );
   }
 
