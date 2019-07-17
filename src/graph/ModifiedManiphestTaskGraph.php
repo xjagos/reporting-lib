@@ -1,10 +1,5 @@
 <?php
 
-const MANIPHEST_IBA_ESTIMATED_TIME = 'std:maniphest:iba:estimated-time';
-const MANIPHEST_IBA_ESTIMATED_TIME_TESTING = 'std:maniphest:iba:estimated-time-testing';
-const MANIPHEST_IBA_ACTUAL_TIME = 'std:maniphest:iba:actual-time';
-const MANIPHEST_IBA_ACTUAL_TIME_TESTING = 'std:maniphest:iba:actual-time-testing';
-
 final class ModifiedManiphestTaskGraph
   extends PhabricatorObjectGraph {
 
@@ -38,13 +33,13 @@ final class ModifiedManiphestTaskGraph
     $result = array();
 
     foreach ($tasks as $task) {      
-      $et = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME);
+      $et = getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME);
       $et = $et == null? 0 : $et;
-      $at = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME);      
+      $at = getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME);      
       $at = $at == null? 0 : $at;
-      $ett = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);      
+      $ett = getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);      
       $ett = $ett == null? 0 : $ett;
-      $att = $this->getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME_TESTING);      
+      $att = getCustomFieldValue($task, MANIPHEST_IBA_ACTUAL_TIME_TESTING);      
       $att = $att == null? 0 : $att;
 
       $queue = new SplQueue();
@@ -69,10 +64,10 @@ final class ModifiedManiphestTaskGraph
             $queue->push($child);
           }
         }
-        $et_sum += $this->getCustomFieldValue($actTask, MANIPHEST_IBA_ESTIMATED_TIME);
-        $at_sum += $this->getCustomFieldValue($actTask, MANIPHEST_IBA_ACTUAL_TIME);
-        $ett_sum += $this->getCustomFieldValue($actTask, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);
-        $att_sum += $this->getCustomFieldValue($actTask, MANIPHEST_IBA_ACTUAL_TIME_TESTING);
+        $et_sum += getCustomFieldValue($actTask, MANIPHEST_IBA_ESTIMATED_TIME);
+        $at_sum += getCustomFieldValue($actTask, MANIPHEST_IBA_ACTUAL_TIME);
+        $ett_sum += getCustomFieldValue($actTask, MANIPHEST_IBA_ESTIMATED_TIME_TESTING);
+        $att_sum += getCustomFieldValue($actTask, MANIPHEST_IBA_ACTUAL_TIME_TESTING);
       }                  
 
       $result['et_res'] = $et.' / '.$et_sum;
@@ -239,26 +234,4 @@ final class ModifiedManiphestTaskGraph
       pht("\xC2\xB7 \xC2\xB7 \xC2\xB7"),
     );
   }
-
-    /**
-   * @param[in] object Phabricator object which has the custom field
-   * @param[in] keyField Key of custom field
-   * 
-   * @return custom field value
-   */
-  private function getCustomFieldValue($object, $keyField) {        
-    $field = PhabricatorCustomField::getObjectField(
-      $object,
-      PhabricatorCustomField::ROLE_DEFAULT,
-      $keyField
-    );
-  
-    id(new PhabricatorCustomFieldStorageQuery())
-    ->addField($field)
-    ->execute();
-  
-    $value = $field->getValueForStorage();
-    return $value;
-  }
-
 }
