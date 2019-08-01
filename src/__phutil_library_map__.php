@@ -18,9 +18,12 @@ phutil_register_library_map(array(
     'PhabricatorTasksDatasource' => 'typehead/PhabricatorTasksDatasource.php',
     'ReportApplication' => 'application/PhabricatorReportApplication.php',
     'ReportController' => 'controller/ReportController.php',
+    'ReportingMissingCustomFieldException' => 'exception/ReportingMissingCustomFieldException.php',
     'TaskTreeController' => 'controller/TaskTreeController.php',
   ),
-  'function' => array(),
+  'function' => array(
+    'getCustomFieldValue' => 'utilities/CustomFieldUtilities.php',
+  ),
   'xmap' => array(
     'ChartController' => 'PhabricatorController',
     'EmployeeWorkloadController' => 'PhabricatorController',
@@ -31,6 +34,7 @@ phutil_register_library_map(array(
     'PhabricatorTasksDatasource' => 'PhabricatorTypeaheadDatasource',
     'ReportApplication' => 'PhabricatorApplication',
     'ReportController' => 'PhabricatorController',
+    'ReportingMissingCustomFieldException' => 'Exception',
     'TaskTreeController' => 'PhabricatorController',
   ),
 ));

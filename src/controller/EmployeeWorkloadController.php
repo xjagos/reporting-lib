@@ -1,9 +1,9 @@
 <?php
 
-const MANIPHEST_IBA_ESTIMATED_TIME = 'std:maniphest:iba:estimated-time';
-const MANIPHEST_IBA_ESTIMATED_TIME_TESTING = 'std:maniphest:iba:estimated-time-testing';
-const MANIPHEST_IBA_ACTUAL_TIME = 'std:maniphest:iba:actual-time';
-const MANIPHEST_IBA_ACTUAL_TIME_TESTING = 'std:maniphest:iba:actual-time-testing';
+// const MANIPHEST_IBA_ESTIMATED_TIME = 'std:maniphest:iba:estimated-time';
+// const MANIPHEST_IBA_ESTIMATED_TIME_TESTING = 'std:maniphest:iba:estimated-time-testing';
+// const MANIPHEST_IBA_ACTUAL_TIME = 'std:maniphest:iba:actual-time';
+// const MANIPHEST_IBA_ACTUAL_TIME_TESTING = 'std:maniphest:iba:actual-time-testing';
 const MANIPHEST_IBA_TESTER = 'std:maniphest:iba:tester';
 const MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE = 'std:maniphest:iba:estimated-completion-date';
 
@@ -73,9 +73,9 @@ final class EmployeeWorkloadController extends PhabricatorController {
         ->executeOne();
       
       // Load user custom fields: overloadRatio and tarif
-      $this->overloadRatio = $this->getCustomFieldValue($this->chosenUser, USER_REPORTING_OVERLOAD_RATIO);
+      $this->overloadRatio = getCustomFieldValue($this->chosenUser, USER_REPORTING_OVERLOAD_RATIO);
       $this->overloadRatio = $this->overloadRatio == null ? 0.2 : $this->overloadRatio / 100;
-      $this->tarif = $this->getCustomFieldValue($this->chosenUser, USER_REPORTING_WORKTIME_TARIF);
+      $this->tarif = getCustomFieldValue($this->chosenUser, USER_REPORTING_WORKTIME_TARIF);
       $this->tarif = $this->tarif == null ? 1.0 : $this->tarif / 100;
 
       // Get selected dates
@@ -103,7 +103,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
     ->withUsernames(array($userName))
     ->executeOne();
 
-    $usersList = $this->getCustomFieldValue($this->viewer, USER_REPORTING_ACCESS_CONTROL_LIST);
+    $usersList = getCustomFieldValue($this->viewer, USER_REPORTING_ACCESS_CONTROL_LIST);
 
     if($usersList != null && count($usersList) > 0) {
       foreach ($usersList as $user) {      
@@ -312,7 +312,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
   private function removeTasksEndingBeforeStart($tasks) {
     $result = array();    
     foreach($tasks as $task) {
-      $completionDate = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE);
+      $completionDate = getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE);
       if($completionDate >= $this->startDate) {
         array_push($result, $task);
       }
@@ -323,7 +323,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
   private function getUndoneTasks($tasks) {
     $result = array();    
     foreach($tasks as $task) {
-      $completionDate = $this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE);
+      $completionDate = getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE);
       if($completionDate < $this->startDate) {
         array_push($result, $task);
       }
@@ -405,8 +405,8 @@ final class EmployeeWorkloadController extends PhabricatorController {
   private function getUndoneTestsByTester($tests) {
     $result = array();    
     foreach($tests as $test) {
-      $completionDate = $this->getCustomFieldValue($test, MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE);      
-      $tester = $this->getCustomFieldValue($test, MANIPHEST_IBA_TESTER);
+      $completionDate = getCustomFieldValue($test, MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE);      
+      $tester = getCustomFieldValue($test, MANIPHEST_IBA_TESTER);
       $tstr = substr($tester, 2, -2);      
       if($completionDate < $this->startDate && $tstr == $this->chosenUser->getPHID()) {
         array_push($result, $test);
@@ -457,7 +457,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
 
       $userTasks = array();
       foreach($tasks as $task) {
-          $tester = $this->getCustomFieldValue($task, MANIPHEST_IBA_TESTER);
+          $tester = getCustomFieldValue($task, MANIPHEST_IBA_TESTER);
           $tstr = substr($tester, 2, -2);
           if($tstr == $this->chosenUser->getPHID()) {
             array_push($userTasks, $task);
@@ -486,26 +486,31 @@ final class EmployeeWorkloadController extends PhabricatorController {
     return $list;
   }
 
-  /**
-   * @param[in] object Phabricator object which has the custom field
-   * @param[in] keyField Key of custom field
-   * 
-   * @return custom field value
-   */
-  private function getCustomFieldValue($object, $keyField) {        
-    $field = PhabricatorCustomField::getObjectField(
-      $object,
-      PhabricatorCustomField::ROLE_DEFAULT,
-      $keyField
-    );
-  
-    id(new PhabricatorCustomFieldStorageQuery())
-    ->addField($field)
-    ->execute();
-  
-    $value = $field->getValueForStorage();
-    return $value;
-  }
+  // /**
+  //  * @param[in] object Phabricator object which has the custom field
+  //  * @param[in] keyField Key of custom field
+  //  * 
+  //  * @return custom field value
+  //  */
+  // private function getCustomFieldValue($object, $keyField) {
+  //   try {
+  //     $field = PhabricatorCustomField::getObjectField(
+  //       $object,
+  //       PhabricatorCustomField::ROLE_DEFAULT,
+  //       $keyField
+  //     );
+    
+  //     id(new PhabricatorCustomFieldStorageQuery())
+  //     ->addField($field)
+  //     ->execute();
+    
+  //     $value = $field->getValueForStorage();
+  //     return $value;
+  //   } catch (TypeError $e) {      
+  //     throw new ReportingMissingCustomFieldException($keyField);      
+  //   }
+
+  // }
 
   /**
    * @param[in] tasks
@@ -524,12 +529,12 @@ final class EmployeeWorkloadController extends PhabricatorController {
     $actualTime = $implTime ? MANIPHEST_IBA_ACTUAL_TIME : MANIPHEST_IBA_ACTUAL_TIME_TESTING;
         
     foreach ($tasks as $task) {
-      $eh = $this->getCustomFieldValue($task, $estimatedTime);
-      $ah = $this->getCustomFieldValue($task, $actualTime);
+      $eh = getCustomFieldValue($task, $estimatedTime);
+      $ah = getCustomFieldValue($task, $actualTime);
       $estimatedHours += $eh;
       $actualHours += $ah;
 
-      if($this->getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE) 
+      if(getCustomFieldValue($task, MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE) 
           <= $this->endDate) {
         $estimatedHoursEP += $eh;
         $actualHoursEP += $ah;                
@@ -557,7 +562,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
 
     $result = array();        
     foreach($tasks as $task) {
-        $tester = $this->getCustomFieldValue($task, MANIPHEST_IBA_TESTER);
+        $tester = getCustomFieldValue($task, MANIPHEST_IBA_TESTER);
         $tstr = substr($tester, 2, -2);
         if($tstr == $this->chosenUser->getPHID()) {
           array_push($result, $task);
