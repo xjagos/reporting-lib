@@ -33,7 +33,7 @@ final class ReportApplication extends PhabricatorApplication {
         '' => 'ReportController',
         'employeeworkload/' => 'EmployeeWorkloadController',
         'tasktree/' => 'TaskTreeController',
-        'chart/' => 'ChartController',
+        //'chart/' => 'ChartController',
       ),
     );
   }

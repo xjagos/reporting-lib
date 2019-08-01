@@ -27,13 +27,13 @@ final class ReportController extends PhabricatorController {
         ->addAttribute(
           pht('View tree of tasks with estimated and actual implementation time.')));
 
-    $menu->addItem(
-      id(new PHUIObjectItemView())
-        ->setHeader(pht('Projects implementation time chart'))
-        ->setImageIcon('fa-area-chart')
-        ->setHref($this->getApplicationURI('chart/'))
-        ->setClickable(true)
-        ->addAttribute(pht('View chart displaying time spended on individual projects.')));    
+    // $menu->addItem(
+    //   id(new PHUIObjectItemView())
+    //     ->setHeader(pht('Projects implementation time chart'))
+    //     ->setImageIcon('fa-area-chart')
+    //     ->setHref($this->getApplicationURI('chart/'))
+    //     ->setClickable(true)
+    //     ->addAttribute(pht('View chart displaying time spended on individual projects.')));    
 
     $crumbs = $this->buildApplicationCrumbs();
     $crumbs->addTextCrumb(pht('Home'));
