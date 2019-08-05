@@ -10,6 +10,7 @@ For installation library follow instructions below:
 &nbsp;&nbsp;&nbsp; *git clone https://github.com/xjagos/reporting-lib.git*
 
 **2. Go to folder: reporting-lib**
+&nbsp;&nbsp;&nbsp; *cd reporting-lib*
 
 **3. Create library**\
 &nbsp;&nbsp;&nbsp; In reporting-lib/ run: *arc liberate src/*\
