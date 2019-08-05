@@ -38,7 +38,7 @@ For installation library follow instructions below:
 &nbsp;&nbsp;&nbsp;Edit (create) file: *ENVIRONMENT* and add row: *custom/libconfig*
 
 **7. Copy CSS file**\
-&nbsp;&nbsp;&nbsp;Copy file: *reporting-lib/conf/reporting-styles.css* to: *phabricator/webroot/rsrc/css*
+&nbsp;&nbsp;&nbsp;Copy file: *reporting-lib/conf/css/reporting-styles.css* to: *phabricator/webroot/rsrc/css*
 
 **8. Rebuild celerity map**\
 &nbsp;&nbsp;&nbsp;In: *phabricator/* run: *./bin/celerity map*
