@@ -9,7 +9,7 @@ For installation library follow instructions below:
 **1. Download reporting library from:** https://github.com/xjagos/reporting-lib.git \
 &nbsp;&nbsp;&nbsp; *git clone https://github.com/xjagos/reporting-lib.git*
 
-**2. Go to folder: reporting-lib**
+**2. Go to folder: reporting-lib** \
 &nbsp;&nbsp;&nbsp; *cd reporting-lib*
 
 **3. Create library**\
