@@ -35,7 +35,7 @@ Reporting library will be added to phabricator. You will find it in Applications
 For updating you need:
 
 **1. Update Repository**\
-&nbsp;&nbsp;&nbsp; In: *reporting-lib/* run: *git pull master origin* 
+&nbsp;&nbsp;&nbsp; In: *reporting-lib/* run: *git pull origin master* 
 
 **2. Run: arc liberate src/**
 
