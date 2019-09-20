@@ -31,14 +31,6 @@ For installation library follow instructions below:
 
 Reporting library will be added to phabricator. You will find it in Applications by name Reporting.
 
-## Update
-For updating you need:
-
-**1. Update Repository**\
-&nbsp;&nbsp;&nbsp; In: *reporting-lib/* run: *git pull origin master* 
-
-**2. Run: arc liberate src/**
-
 ## Configuration
 It is necessary to create custom fields for proper working of library. For more info about custom fields see: https://secure.phabricator.com/book/phabricator/article/custom_fields/
 
@@ -57,6 +49,14 @@ It is necessary to create custom fields for proper working of library. For more 
 \
 \
 &nbsp;&nbsp;&nbsp; Save configuration by button *Save Config Entry*.
+
+## Update
+For updating you need:
+
+**1. Update Repository**\
+&nbsp;&nbsp;&nbsp; In: *reporting-lib/* run: *git pull origin master* 
+
+**2. Run: arc liberate src/**
 
 ## Usage
 You will find it in *Applications* by name *Reporting*. It consists of 3 submodules:
