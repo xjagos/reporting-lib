@@ -58,6 +58,25 @@ For updating you need:
 
 **2. Run: arc liberate src/**
 
+## Uninstallation
+For uninstallation library follow instructions below:
+
+**1. Remove reporting-lib directory**
+&nbsp;&nbsp;&nbsp; *rm -r reporting-lib*
+
+**2. Remove configuration file** \
+&nbsp;&nbsp;&nbsp; Remove *phabricator/conf/custom/libconfig.conf.php*
+&nbsp;&nbsp;&nbsp; In: *phabricator/conf/local/ENVIRONMENT* remove row: custom/libconfig
+
+**3. Remove CSS file**\
+&nbsp;&nbsp;&nbsp;Remove *phabricator/webroot/rsrc/css/reporting-styles.css*
+
+**4. Rebuild celerity map**\
+&nbsp;&nbsp;&nbsp;Run: *./phabricator/bin/celerity map*
+
+**5. Remove custom fields**\
+&nbsp;&nbsp;&nbsp;See chapter Configuration
+
 ## Usage
 You will find it in *Applications* by name *Reporting*. It consists of 2 submodules:
 
