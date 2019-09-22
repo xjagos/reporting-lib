@@ -13,7 +13,7 @@ For installation library follow instructions below:
 &nbsp;&nbsp;&nbsp; *cd reporting-lib*
 
 **3. Create library**\
-&nbsp;&nbsp;&nbsp; In reporting-lib/ run: */arcanist/bin/arc liberate src/* \
+&nbsp;&nbsp;&nbsp; In reporting-lib/ run: */arcanist/bin/arc liberate src/*
 
 **4. Set path to phabricator/src**\
 &nbsp;&nbsp;&nbsp;In file: *reporting-lib/.arcconfig* edit path: *"../phabricator/src/"* to your current path
