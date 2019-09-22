@@ -9,24 +9,21 @@ For installation library follow instructions below:
 **1. Download reporting library from:** https://github.com/xjagos/reporting-lib.git \
 &nbsp;&nbsp;&nbsp; *git clone https://github.com/xjagos/reporting-lib.git*
 
-**2. Go to folder: reporting-lib** \
-&nbsp;&nbsp;&nbsp; *cd reporting-lib*
+**2. Create library**\
+&nbsp;&nbsp;&nbsp; Run: */arcanist/bin/arc liberate reporting-lib/src/*
 
-**3. Create library**\
-&nbsp;&nbsp;&nbsp; In reporting-lib/ run: */arcanist/bin/arc liberate src/*
-
-**4. Set path to phabricator/src**\
+**3. Set path to phabricator/src**\
 &nbsp;&nbsp;&nbsp;In file: *reporting-lib/.arcconfig* edit path: *"../phabricator/src/"* to your current path
 
-**5. Set configuration**\
+**4. Set configuration**\
 &nbsp;&nbsp;&nbsp;Copy folder: *reporting-lib/conf/custom* to: *phabricator/conf*\
 &nbsp;&nbsp;&nbsp;Go to: *phabricator/conf/local*\
 &nbsp;&nbsp;&nbsp;Edit (create) file: *ENVIRONMENT* and add row: *custom/libconfig*
 
-**6. Copy CSS file**\
+**5. Copy CSS file**\
 &nbsp;&nbsp;&nbsp;Copy file: *reporting-lib/conf/css/reporting-styles.css* to: *phabricator/webroot/rsrc/css*
 
-**7. Rebuild celerity map**\
+**6. Rebuild celerity map**\
 &nbsp;&nbsp;&nbsp;In: *phabricator/* run: *./bin/celerity map*
 
 Reporting library will be added to phabricator. You will find it in Applications by name Reporting.
