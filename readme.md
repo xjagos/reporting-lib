@@ -17,8 +17,7 @@ For installation library follow instructions below:
 
 **4. Set configuration**\
 &nbsp;&nbsp;&nbsp;Copy folder: *reporting-lib/conf/custom* to: *phabricator/conf*\
-&nbsp;&nbsp;&nbsp;Go to: *phabricator/conf/local*\
-&nbsp;&nbsp;&nbsp;Edit (create) file: *ENVIRONMENT* and add row: *custom/libconfig*
+&nbsp;&nbsp;&nbsp;Edit (create) file: */phabricator/conf/localENVIRONMENT* and add row: *custom/libconfig*
 
 **5. Copy CSS file**\
 &nbsp;&nbsp;&nbsp;Copy file: *reporting-lib/conf/css/reporting-styles.css* to: *phabricator/webroot/rsrc/css*
