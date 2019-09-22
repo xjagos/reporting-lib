@@ -61,7 +61,7 @@ For updating you need:
 ## Uninstallation
 For uninstallation library follow instructions below:
 
-**1. Remove reporting-lib directory**
+**1. Remove reporting-lib directory** \
 &nbsp;&nbsp;&nbsp; *rm -r reporting-lib*
 
 **2. Remove configuration file** \
