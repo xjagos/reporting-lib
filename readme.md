@@ -23,7 +23,7 @@ For installation library follow instructions below:
 &nbsp;&nbsp;&nbsp;Copy file: *reporting-lib/conf/css/reporting-styles.css* to: *phabricator/webroot/rsrc/css*
 
 **6. Rebuild celerity map**\
-&nbsp;&nbsp;&nbsp;In: *phabricator/* run: *./bin/celerity map*
+&nbsp;&nbsp;&nbsp;Run: *phabricator//bin/celerity map*
 
 Reporting library will be added to phabricator. You will find it in Applications by name Reporting.
 
