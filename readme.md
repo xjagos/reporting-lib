@@ -13,7 +13,7 @@ For installation library follow instructions below:
 &nbsp;&nbsp;&nbsp; *cd reporting-lib*
 
 **3. Create library**\
-&nbsp;&nbsp;&nbsp; In reporting-lib/ run: */arcanist/bin/arc liberate src/*\
+&nbsp;&nbsp;&nbsp; In reporting-lib/ run: */arcanist/bin/arc liberate src/* \
 
 **4. Set path to phabricator/src**\
 &nbsp;&nbsp;&nbsp;In file: *reporting-lib/.arcconfig* edit path: *"../phabricator/src/"* to your current path
@@ -65,7 +65,7 @@ For uninstallation library follow instructions below:
 &nbsp;&nbsp;&nbsp; *rm -r reporting-lib*
 
 **2. Remove configuration file** \
-&nbsp;&nbsp;&nbsp; Remove *phabricator/conf/custom/libconfig.conf.php*
+&nbsp;&nbsp;&nbsp; Remove *phabricator/conf/custom/libconfig.conf.php* \
 &nbsp;&nbsp;&nbsp; In: *phabricator/conf/local/ENVIRONMENT* remove row: custom/libconfig
 
 **3. Remove CSS file**\
