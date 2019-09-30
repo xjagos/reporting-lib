@@ -164,9 +164,9 @@ final class ModifiedManiphestTaskGraph
       $status,
       //$assigned,
       $link,  
-      $result['et_res'],
-      $result['at_res'],
-      $result['ett_res'],
+      $result['et_res'],      
+      $result['at_res'],            
+      $result['ett_res'],      
       $result['att_res']
     );
   }
@@ -181,9 +181,9 @@ final class ModifiedManiphestTaskGraph
           //pht('Assigned'),
           pht('Task'),
           pht('Estimated'),
-          pht('Actual'),          
-          pht('Estimated - testing'),          
-          pht('Actual - testing'),          
+          pht('Actual'),
+          pht('Estimated - testing'),
+          pht('Actual - testing'),
         ))
       ->setColumnClasses(
         array(

@@ -19,8 +19,9 @@ final class PhabricatorTasksDatasource
     $viewer = $this->getViewer();
 
     $query = id(new ManiphestTaskQuery())
-      ->setOrderVector(array('id'));
+      ->setOrderVector(array('id'));      
 
+    $this->setLimit(1000); 
     $tasks = $this->executeQuery($query);  
     
     $searchedValue = strtolower($this->getQuery());

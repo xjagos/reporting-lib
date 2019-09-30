@@ -1,7 +1,5 @@
 <?php
 
-//include(dirname(__FILE__)."/../utilities/CustomFieldUtilities.php");
-
 final class TaskTreeController extends PhabricatorController {    
 
   private $selectBox;  
@@ -61,7 +59,12 @@ final class TaskTreeController extends PhabricatorController {
 
         $sumTable->setRowClasses(['','','','','highlighted']);
 
-        $page->appendChild(array($sumTable));
+        $sumTableBox = id(new PHUIObjectBoxView())
+        ->appendChild($sumTable)
+        ->setHeaderText(pht('Estimated hours on task by statuses'))
+        ->setBackground(PHUIObjectBoxView::GREY); 
+
+        $page->appendChild(array($sumTableBox));
         $emptyHeader = id(new PHUIHeaderView())
           ->setHeader('');
         $page->appendChild(array($emptyHeader));
@@ -74,9 +77,14 @@ final class TaskTreeController extends PhabricatorController {
         ->loadGraph();
 
         $graph_table = $task_graph->newGraphTable();
-        $className = get_class($graph_table);  
+        $className = get_class($graph_table);
 
-        $page->appendChild(array($graph_table));
+        $graphTableBox = id(new PHUIObjectBoxView())
+        ->appendChild($graph_table)
+        ->setHeaderText(pht('Task tree with estimated / actual hours of task and subtasks'))
+        ->setBackground(PHUIObjectBoxView::GREY); 
+
+        $page->appendChild(array($graphTableBox));
       }
     }      
 

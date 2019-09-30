@@ -153,8 +153,8 @@ final class EmployeeWorkloadController extends PhabricatorController {
     // Fill options with users names
     $this->options = array();    
     foreach ($rows as $row) {
-      //if($this->checkACL($row['userName'])) {
-      if(true) {
+      if($this->checkACL($row['userName'])) {
+      //if(true) {
         array_push($this->options, $row['userName']);
       }          
     }
