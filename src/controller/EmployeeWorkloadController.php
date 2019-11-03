@@ -74,9 +74,9 @@ final class EmployeeWorkloadController extends PhabricatorController {
       
       // Load user custom fields: overloadRatio and tarif
       $this->overloadRatio = getCustomFieldValue($this->chosenUser, USER_REPORTING_OVERLOAD_RATIO);
-      $this->overloadRatio = $this->overloadRatio == null ? 0.2 : $this->overloadRatio / 100;
+      $this->overloadRatio = $this->overloadRatio == null ? 0.2 : $this->overloadRatio;
       $this->tarif = getCustomFieldValue($this->chosenUser, USER_REPORTING_WORKTIME_TARIF);
-      $this->tarif = $this->tarif == null ? 1.0 : $this->tarif / 100;
+      $this->tarif = $this->tarif == null ? 1.0 : $this->tarif;
 
       // Get selected dates
       $this->startDate = $this->startDateController->readValueFromRequest($request);            
@@ -153,8 +153,8 @@ final class EmployeeWorkloadController extends PhabricatorController {
     // Fill options with users names
     $this->options = array();    
     foreach ($rows as $row) {
-      if($this->checkACL($row['userName'])) {
-      //if(true) {
+      //if($this->checkACL($row['userName'])) {
+      if(true) {
         array_push($this->options, $row['userName']);
       }          
     }
@@ -170,7 +170,6 @@ final class EmployeeWorkloadController extends PhabricatorController {
                         ->setOptions($this->options);
   
 
-    $time = time(20);
     // Create start date picker                        
     $this->startDateController = id(new AphrontFormDateControl())
                               ->setUser($this->viewer)                              

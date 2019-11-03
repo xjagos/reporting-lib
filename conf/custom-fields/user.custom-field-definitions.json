@@ -1,13 +1,13 @@
 {
   "reporting:overload-ratio": {
     "name": "Employee overload ratio",
-    "type": "int",
+    "type": "string",
     "required": false,
     "search": true
   },
   "reporting:worktime-tarif": {
     "name": "Employee worktime tarif",
-    "type": "int",
+    "type": "string",
     "required": false,
     "search": true
   },
