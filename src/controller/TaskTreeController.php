@@ -73,7 +73,8 @@ final class TaskTreeController extends PhabricatorController {
         $task_graph = id(new ModifiedManiphestTaskGraph())
         ->setViewer($viewer)
         ->setSeedPHID($tasks[0])
-        //->setLoadEntireGraph(true)      
+        //->setRenderOnlyAdjacentNodes(true)
+        //->setLoadEntireGraph(true)
         ->loadGraph();
 
         $graph_table = $task_graph->newGraphTable();
