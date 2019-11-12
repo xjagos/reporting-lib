@@ -11,18 +11,18 @@ phutil_register_library_map(array(
   'class' => array(
     'ChartController' => 'controller/ChartController.php',
     'EmployeeWorkloadController' => 'controller/EmployeeWorkloadController.php',
-    'ModifiedManiphestTaskGraph' => 'graph/ModifiedManiphestTaskGraph.php',
+    'ModifiedManiphestTaskGraph' => 'view/graph/ModifiedManiphestTaskGraph.php',
     'ModifiedManiphestTaskResultListView' => 'view/ModifiedManiphestTaskResultListView.php',
     'ModifiedPHUIPropertyListView' => 'view/ModifiedPHUIPropertyListView.php',
-    'ModifiedPhabricatorObjectGraph' => 'graph/ModifiedPhabricatorObjectGraph.php',
-    'PhabricatorTasksDatasource' => 'typehead/PhabricatorTasksDatasource.php',
+    'ModifiedPhabricatorObjectGraph' => 'view/graph/ModifiedPhabricatorObjectGraph.php',
+    'PhabricatorTasksDatasource' => 'storage/PhabricatorTasksDatasource.php',
     'ReportApplication' => 'application/PhabricatorReportApplication.php',
     'ReportController' => 'controller/ReportController.php',
     'ReportingMissingCustomFieldException' => 'exception/ReportingMissingCustomFieldException.php',
     'TaskTreeController' => 'controller/TaskTreeController.php',
   ),
   'function' => array(
-    'getCustomFieldValue' => 'utilities/CustomFieldUtilities.php',
+    'getCustomFieldValue' => 'storage/CustomFieldUtilities.php',
   ),
   'xmap' => array(
     'ChartController' => 'PhabricatorController',
