@@ -5,7 +5,7 @@ final class ChartController extends PhabricatorController {
     $crumbs = $this->buildApplicationCrumbs();
     $crumbs->addTextCrumb(pht('Chart'));
     return $this->newPage()
-    ->setTitle('Chart')
+    ->setTitle(pht('Chart'))
     ->setCrumbs($crumbs);
   }
 

@@ -25,7 +25,7 @@ final class TaskTreeController extends PhabricatorController {
     $crumbs->addTextCrumb(pht('Task tree'));   
       
     $page = $this->newPage()
-      ->setTitle('Task tree')
+      ->setTitle(pht('Task tree'))
       ->setCrumbs($crumbs)
       ->appendChild($form);
       
@@ -38,11 +38,11 @@ final class TaskTreeController extends PhabricatorController {
         $resArr = $this->getEstimatedHoursByStatuses($viewer, $tasks[0]);
 
         $total = array_sum($resArr);
-        $rows[] = array('Open', $resArr['open']);
-        $rows[] = array('Waiting', $resArr['waiting']);
-        $rows[] = array('Test', $resArr['test']);
-        $rows[] = array('Resolved', $resArr['resolved']);
-        $rows[] = array('Total', $total);
+        $rows[] = array(pht('Open'), $resArr['open']);
+        $rows[] = array(pht('Waiting'), $resArr['waiting']);
+        $rows[] = array(pht('Test'), $resArr['test']);
+        $rows[] = array(pht('Resolved'), $resArr['resolved']);
+        $rows[] = array(pht('Total'), $total);
 
         $sumTable = id(new AphrontTableView($rows))
           ->setNoDataString(pht('No tasks.'))

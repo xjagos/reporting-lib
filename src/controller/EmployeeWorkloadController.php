@@ -1,9 +1,5 @@
 <?php
 
-// const MANIPHEST_IBA_ESTIMATED_TIME = 'std:maniphest:iba:estimated-time';
-// const MANIPHEST_IBA_ESTIMATED_TIME_TESTING = 'std:maniphest:iba:estimated-time-testing';
-// const MANIPHEST_IBA_ACTUAL_TIME = 'std:maniphest:iba:actual-time';
-// const MANIPHEST_IBA_ACTUAL_TIME_TESTING = 'std:maniphest:iba:actual-time-testing';
 const MANIPHEST_IBA_TESTER = 'std:maniphest:iba:tester';
 const MANIPHEST_IBA_ESTIMATED_COMPLETION_DATE = 'std:maniphest:iba:estimated-completion-date';
 
@@ -58,7 +54,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
 
     $title = pht('Employee Workload');
     $crumbs = $this->buildApplicationCrumbs();
-    $crumbs->addTextCrumb(pht('Workload'));      
+    $crumbs->addTextCrumb(pht('Workload'));
         
     if ($request->isFormPost()) {      
       // Get selected username from selectbox
@@ -165,8 +161,8 @@ final class EmployeeWorkloadController extends PhabricatorController {
 
     // Create select box      
     $this->selectBox = id(new AphrontFormSelectControl())
-                        ->setLabel(pht('Name'))                        
-                        ->setName(pht('name'))                                                                    
+                        ->setLabel(pht('User'))                        
+                        ->setName('name')                                                                    
                         ->setOptions($this->options);
   
 
@@ -176,7 +172,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
                               ->setValue($this->getFirstDayOfWeek())
                               ->setName('startDate')
                               //->setInitialTime($time)                                
-                              ->setLabel('Start')
+                              ->setLabel(pht('Start'))
                               ->setIsTimeDisabled(true);
 
     // Create end date picker    
@@ -184,7 +180,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
                               ->setUser($this->viewer)
                               ->setValue($this->getLastDayOfWeek())
                               ->setName('endDate')
-                              ->setLabel('End')
+                              ->setLabel(pht('End'))
                               ->setIsTimeDisabled(true);
         
     // Create input form                              
@@ -237,7 +233,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
         
     $header = id(new PHUIHeaderView())
       ->setHeader($this->userName)
-      ->setSubHeader($this->getItemWithTooltip($this->getChosenEpoqueStr(), TT_PERIOD))
+      ->setSubHeader($this->getItemWithTooltip($this->getChosenEpoqueStr(), pht(TT_PERIOD)))
       ->setImage($picture);        
 
 
@@ -247,8 +243,8 @@ final class EmployeeWorkloadController extends PhabricatorController {
     $workload = $this->calculateWorkload($this->openTasksArr);
 
     $openTasksPr = id(new PHUIPropertyListView())
-    ->addProperty($this->getItemWithTooltip('Planned hours', TT_OTA_PLANNED_HOURS), $workload['all'])
-    ->addProperty($this->getItemWithTooltip('Planned hours - tasks ending in period', TT_OTA_PLANNED_HOURS_IN_PERIOD), $workload['in_period']);
+    ->addProperty($this->getItemWithTooltip(pht('Planned hours'), pht(TT_OTA_PLANNED_HOURS)), $workload['all'])
+    ->addProperty($this->getItemWithTooltip(pht('Planned hours - tasks ending in period'), pht(TT_OTA_PLANNED_HOURS_IN_PERIOD)), $workload['in_period']);
 
     $openTasks = id(new PHUIObjectBoxView())
     ->appendChild($openTasksPr)    
@@ -263,8 +259,8 @@ final class EmployeeWorkloadController extends PhabricatorController {
     $testingWorkload = $this->calculateWorkload($this->openTestsArr, false);
 
     $openTestsPr = id(new PHUIPropertyListView())                
-    ->addProperty($this->getItemWithTooltip('Planned hours', TT_OTE_PLANNED_HOURS), $testingWorkload['all'])
-    ->addProperty($this->getItemWithTooltip('Planned hours - tasks ending in period', TT_OTE_PLANNED_HOURS_IN_PERIOD), $testingWorkload['in_period']);
+    ->addProperty($this->getItemWithTooltip(pht('Planned hours'), pht(TT_OTE_PLANNED_HOURS)), $testingWorkload['all'])
+    ->addProperty($this->getItemWithTooltip(pht('Planned hours - tasks ending in period'), pht(TT_OTE_PLANNED_HOURS_IN_PERIOD)), $testingWorkload['in_period']);
 
     $openTests = id(new PHUIObjectBoxView())
       ->appendChild($openTestsPr)
@@ -279,12 +275,12 @@ final class EmployeeWorkloadController extends PhabricatorController {
     $workingHoursFromToday = $this->getWorkingHours($this->getWorkingDays(strtotime('today midnight'),$this->endDate, array()));
     
     $wlDetails = id(new ModifiedPHUIPropertyListView())      
-      ->addProperty($this->getItemWithTooltip('Worktime tarif', TT_WORKTIME_TARIF), $this->tarif)      
-      ->addProperty($this->getItemWithTooltip('Overload ratio', TT_OVERLOAD_RATIO), $this->overloadRatio)
-      ->addProperty($this->getItemWithTooltip('Total estimated hours in period', TT_HOURS_PERIOD), $workingHoursPeriod)
-      ->addProperty($this->getItemWithTooltip('Total estimated hours (from today)', TT_HOURS_FROM_TODAY), $workingHoursFromToday)
-      ->addProperty($this->getItemWithTooltip('Planned hours', TT_WD_PLANNED_HOURS), $workload['all'] + $testingWorkload['all'])
-      ->addProperty($this->getItemWithTooltip('Planned hours – tasks ending in period', TT_WD_PLANNED_HOURS_IN_PERIOD), $workload['in_period'] + $testingWorkload['in_period']);
+      ->addProperty($this->getItemWithTooltip(pht('Worktime tarif'), pht(TT_WORKTIME_TARIF)), $this->tarif)      
+      ->addProperty($this->getItemWithTooltip(pht('Overload ratio'), pht(TT_OVERLOAD_RATIO)), $this->overloadRatio)
+      ->addProperty($this->getItemWithTooltip(pht('Total estimated hours in period'), pht(TT_HOURS_PERIOD)), $workingHoursPeriod)
+      ->addProperty($this->getItemWithTooltip(pht('Total estimated hours (from today)'), pht(TT_HOURS_FROM_TODAY)), $workingHoursFromToday)
+      ->addProperty($this->getItemWithTooltip(pht('Planned hours'), pht(TT_WD_PLANNED_HOURS)), $workload['all'] + $testingWorkload['all'])
+      ->addProperty($this->getItemWithTooltip(pht('Planned hours - tasks ending in period'), pht(TT_WD_PLANNED_HOURS_IN_PERIOD)), $workload['in_period'] + $testingWorkload['in_period']);
       //->addProperty(pht('Total estimated hours'), $totalEstHours.'/'.$workingHours);        
 
     $workloadDetails = id(new PHUIObjectBoxView())    
@@ -305,7 +301,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
 
   private function getChosenEpoqueStr() {
     
-    return date('D d-m-Y', $this->startDate).' - '.date('D d-m-Y', $this->endDate);
+    return pht(date('D', $this->startDate)). date(' d-m-Y', $this->startDate).' - '.pht(date('D', $this->endDate)). date(' d-m-Y', $this->endDate);
   }
 
   private function removeTasksEndingBeforeStart($tasks) {
@@ -360,7 +356,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
 
       array_push($list, id(new PHUIInfoView())                
       //->setTitle($this->getItemWithTooltip('Tasks after completion date', TT_TASKS_AFTER_COMPL_DATE))
-      ->setTitle('Tasks after completion date')
+      ->setTitle(pht('Tasks after completion date'))
       ->setIcon('fa-exclamation')
       ->setFlush(false)
       ->setSeverity(PHUIInfoView::SEVERITY_ERROR)
@@ -438,7 +434,7 @@ final class EmployeeWorkloadController extends PhabricatorController {
         ->setSavedQuery(new PhabricatorSavedQuery());
 
       array_push($list, id(new PHUIInfoView())                
-      ->setTitle('Tests after completion date')
+      ->setTitle(pht('Tests after completion date'))
       ->setIcon('fa-exclamation')
       ->setFlush(false)
       ->setSeverity(PHUIInfoView::SEVERITY_ERROR)

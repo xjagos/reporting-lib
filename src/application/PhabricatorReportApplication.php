@@ -16,7 +16,7 @@ final class ReportApplication extends PhabricatorApplication {
 
 
   public function getShortDescription() {
-    return 'Module for reporting';
+    return pht('Module for reporting');
   }
 
   public function getApplicationGroup() {

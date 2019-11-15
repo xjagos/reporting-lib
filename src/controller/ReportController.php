@@ -10,17 +10,16 @@ final class ReportController extends PhabricatorController {
 
     $menu->addItem(
       id(new PHUIObjectItemView())
-        ->setHeader(pht('Employee workload'))
+        ->setHeader(pht('Employee Workload'))
         ->setImageIcon('fa-user-circle-o')
         ->setHref($this->getApplicationURI('employeeworkload/'))
         ->setClickable(true)
         ->addAttribute(
-          pht(
-            'View workload of employees and manage it.')));
+          pht('View workload of employees and manage it.')));
 
     $menu->addItem(
       id(new PHUIObjectItemView())
-        ->setHeader(pht('Task tree'))
+        ->setHeader(pht('Task Tree'))
         ->setImageIcon('fa-sitemap')
         ->setHref($this->getApplicationURI('tasktree/'))
         ->setClickable(true)
