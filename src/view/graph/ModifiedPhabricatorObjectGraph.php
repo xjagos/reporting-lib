@@ -94,7 +94,8 @@ abstract class ModifiedPhabricatorObjectGraph
     foreach ($edges as $src => $dsts) {
       foreach ($dsts as $key => $dst) {
         if (!isset($nodes[$dst])) {
-          unset($edges[$src][$key]);
+          //unset($edges[$src][$key]);
+          $edges[$src][$key] = null;
         }
       }
     }
@@ -169,13 +170,15 @@ abstract class ModifiedPhabricatorObjectGraph
 
       foreach ($ancestry as $key => $list) {
         if (!isset($adjacent[$key])) {
-          unset($ancestry[$key]);
+          //unset($ancestry[$key]);
+          $ancestry[$key] = null;
           continue;
         }
 
         foreach ($list as $list_key => $item) {
           if (!isset($adjacent[$item])) {
-            unset($ancestry[$key][$list_key]);
+            //unset($ancestry[$key][$list_key]);
+            $ancestry[$key][$list_key];
           }
         }
       }

@@ -481,32 +481,6 @@ final class EmployeeWorkloadController extends PhabricatorController {
     return $list;
   }
 
-  // /**
-  //  * @param[in] object Phabricator object which has the custom field
-  //  * @param[in] keyField Key of custom field
-  //  * 
-  //  * @return custom field value
-  //  */
-  // private function getCustomFieldValue($object, $keyField) {
-  //   try {
-  //     $field = PhabricatorCustomField::getObjectField(
-  //       $object,
-  //       PhabricatorCustomField::ROLE_DEFAULT,
-  //       $keyField
-  //     );
-    
-  //     id(new PhabricatorCustomFieldStorageQuery())
-  //     ->addField($field)
-  //     ->execute();
-    
-  //     $value = $field->getValueForStorage();
-  //     return $value;
-  //   } catch (TypeError $e) {      
-  //     throw new ReportingMissingCustomFieldException($keyField);      
-  //   }
-
-  // }
-
   /**
    * @param[in] tasks
    * @param[in] implTime calculate time for implementation (true) or for testing (false)

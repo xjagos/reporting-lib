@@ -3,7 +3,7 @@
  */
 
 .device-desktop .phui-property-list-key {
-  width:22%;
+  width:26%;
   margin-left: 1%;
   text-align: right;
   float: left;
@@ -12,7 +12,7 @@
 }
 
 .device-desktop .phui-property-list-value {
-  width: 74%;
+  width: 70%;
   margin-left: 1%;
   float: left;
   margin-bottom: 4px;

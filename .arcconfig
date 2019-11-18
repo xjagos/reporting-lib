@@ -1,5 +1,6 @@
 {
   "load": [
-    "../phabricator/src/"
+    "../phabricator/src/",
+    "src/"
   ]
 }

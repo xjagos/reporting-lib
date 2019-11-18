@@ -19,7 +19,10 @@ phutil_register_library_map(array(
     'PhabricatorTasksDatasource' => 'storage/PhabricatorTasksDatasource.php',
     'ReportApplication' => 'application/PhabricatorReportApplication.php',
     'ReportController' => 'controller/ReportController.php',
+    'ReportingApplicationTestCase' => '__tests__/ReportingApplicationTestCase.php',
+    'ReportingEmployeeWorkloadTestCase' => '__tests__/ReportingEmployeeWorkloadTestCase.php',
     'ReportingMissingCustomFieldException' => 'exception/ReportingMissingCustomFieldException.php',
+    'ReportingTaskTreeTestCase' => '__tests__/ReportingTaskTreeTestCase.php',
     'TaskTreeController' => 'controller/TaskTreeController.php',
   ),
   'function' => array(
@@ -36,7 +39,10 @@ phutil_register_library_map(array(
     'PhabricatorTasksDatasource' => 'PhabricatorTypeaheadDatasource',
     'ReportApplication' => 'PhabricatorApplication',
     'ReportController' => 'PhabricatorController',
+    'ReportingApplicationTestCase' => 'PhabricatorTestCase',
+    'ReportingEmployeeWorkloadTestCase' => 'PhabricatorTestCase',
     'ReportingMissingCustomFieldException' => 'Exception',
+    'ReportingTaskTreeTestCase' => 'PhabricatorTestCase',
     'TaskTreeController' => 'PhabricatorController',
   ),
 ));
