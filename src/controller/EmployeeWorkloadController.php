@@ -563,11 +563,16 @@ final class EmployeeWorkloadController extends PhabricatorController {
        ->execute();   
 
     $results = array();
-    foreach($namesArr as $name) {            
+    foreach($namesArr as $name) {
+      $missing = true;            
       foreach($columns as $column) {
-        if($name == $column->getName()) {          
-          array_push($results, $column);          
+        if(strcasecmp($name, $column->getName())) {                  
+          array_push($results, $column);
+          $missing = false;
         }
+      }
+      if($missing) {      
+        throw new ReportingMissingWorkboardColumnException($name);      
       }
     }
     return $results;

@@ -108,7 +108,8 @@ final class PhabricatorCzechTranslation
         'Actual - testing' => 'Odpracováno - testování',
         'No tasks found.' => 'Nebyly nalezeny žádné úkoly.',
 
-
+        "Column: '%s' in your project's workboard for Reporting lib regularly working does not exist." =>
+        "Ve workboardu projektu neexistuje sloupeček s názvem: '%s' potřebný pro správné fungování reportovacího modulu.",
 
     );
   }
