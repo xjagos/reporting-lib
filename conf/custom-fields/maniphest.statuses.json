@@ -1,0 +1,95 @@
+{
+  "open": {
+    "name": "Open",
+    "special": "default",
+    "prefixes": [
+      "open",
+      "opens",
+      "reopen",
+      "reopens"
+    ]
+  },
+  "test": {
+    "name": "Test",
+    "name.full": "Open, In test",
+    "name.action": "Tested",
+    "transaction.icon": "fa-check-square-o ",
+    "closed": false,
+    "prefixes": [
+      "test",
+      "tests",
+      "tested"
+    ]
+  },
+  "resolved": {
+    "name": "Resolved",
+    "name.full": "Closed, Resolved",
+    "closed": true,
+    "special": "closed",
+    "prefixes": [
+      "closed",
+      "closes",
+      "close",
+      "fix",
+      "fixes",
+      "fixed",
+      "resolve",
+      "resolves",
+      "resolved"
+    ],
+    "suffixes": [
+      "as resolved",
+      "as fixed"
+    ],
+    "keywords": [
+      "closed",
+      "fixed",
+      "resolved"
+    ]
+  },
+  "waiting": {
+    "name": "Waiting",
+    "name.full": "Open, Waiting",
+    "name.action": "Waited",
+    "transaction.icon": "fa-clock-o",
+    "closed": false,
+    "prefixes": [
+      "wait",
+      "waits",
+      "waited"
+    ]
+  },
+  "wontfix": {
+    "name": "Wontfix",
+    "name.full": "Closed, Wontfix",
+    "closed": true,
+    "prefixes": [
+      "wontfix",
+      "wontfixes",
+      "wontfixed"
+    ],
+    "suffixes": [
+      "as wontfix"
+    ]
+  },
+  "invalid": {
+    "name": "Invalid",
+    "name.full": "Closed, Invalid",
+    "closed": true,
+    "prefixes": [
+      "invalidate",
+      "invalidates",
+      "invalidated"
+    ],
+    "suffixes": [
+      "as invalid"
+    ]
+  },
+  "duplicate": {
+    "name": "Duplicate",
+    "name.full": "Closed, Duplicate",
+    "transaction.icon": "fa-files-o",
+    "special": "duplicate",
+    "closed": true
+  }
+}
