@@ -52,24 +52,6 @@ It is necessary to create custom fields for proper working of library. For more 
 
 Reporting library will be added to phabricator. You will find it in Applications by name Reporting.
 
-## Configuration
-It is necessary to create custom fields for proper working of library. For more info about custom fields see: https://secure.phabricator.com/book/phabricator/article/custom_fields/
-
-**1. Create Custom Maniphest fields**\
-&nbsp;&nbsp;&nbsp; Copy content of: *reporting-lib/conf/custom-fields/maniphest.custom-field-definitions.json* to: 
-\
-&nbsp;&nbsp;&nbsp; *Phabricator -> Config -> Application settings -> Maniphest -> maniphest.custom-field-definitions -> Database value*
-\
-\
-&nbsp;&nbsp;&nbsp; Save configuration by button *Save Config Entry*.
-
-**2. Create Custom User fields**\
-&nbsp;&nbsp;&nbsp; Copy content of: *reporting-lib/conf/custom-fields/user.custom-field-definitions.json* to: 
-\
-&nbsp;&nbsp;&nbsp; *Phabricator -> Config -> Application settings -> User Profiles -> user.custom-field-definitions -> Database value*
-\
-\
-&nbsp;&nbsp;&nbsp; Save configuration by button *Save Config Entry*.
 
 ## Update
 For updating you need:
