@@ -13,13 +13,32 @@ For installation library follow instructions below:
 &nbsp;&nbsp;&nbsp;Copy folder: *reporting-lib/conf/custom* to: *phabricator/conf*\
 &nbsp;&nbsp;&nbsp;Edit (create) file: */phabricator/conf/local/ENVIRONMENT* and add row: *custom/libconfig*
 
-**3. Copy CSS file**\
+**3. Create custom fields and states**\
+It is necessary to create custom fields for proper working of library. For more info about custom fields see: https://secure.phabricator.com/book/phabricator/article/custom_fields/
+
+***3.1. Create Custom Maniphest fields***\
+&nbsp;&nbsp;&nbsp; Copy content of: *reporting-lib/conf/custom-fields/maniphest.custom-field-definitions.json* to: 
+\
+&nbsp;&nbsp;&nbsp; *Phabricator -> Config -> Application settings -> Maniphest -> maniphest.custom-field-definitions -> Database value*
+\
+\
+&nbsp;&nbsp;&nbsp; Save configuration by button *Save Config Entry*.
+
+***3.2. Create Custom User fields***\
+&nbsp;&nbsp;&nbsp; Copy content of: *reporting-lib/conf/custom-fields/user.custom-field-definitions.json* to: 
+\
+&nbsp;&nbsp;&nbsp; *Phabricator -> Config -> Application settings -> User Profiles -> user.custom-field-definitions -> Database value*
+\
+\
+&nbsp;&nbsp;&nbsp; Save configuration by button *Save Config Entry*.
+
+**4. Copy CSS file**\
 &nbsp;&nbsp;&nbsp;Copy file: *reporting-lib/conf/css/reporting-styles.css* to: *phabricator/webroot/rsrc/css*
 
-**4. Rebuild celerity map**\
+**5. Rebuild celerity map**\
 &nbsp;&nbsp;&nbsp;Run: *phabricator/bin/celerity map*
 
-**5. Restart server**\
+**6. Restart server**\
 &nbsp;&nbsp;&nbsp;Restart server with Phabricator
 
 Reporting library will be added to phabricator. You will find it in Applications by name Reporting.
